@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Map, Shield } from "lucide-react";
+import { MessageSquare, FileText, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Index = () => {
@@ -23,7 +23,7 @@ const Index = () => {
           
           <div className="flex justify-center pt-4">
             <Button asChild size="lg" className="text-lg h-14 shadow-primary">
-              <Link to="/dashboard">Acesso Governo</Link>
+              <Link to="/dashboard">Começar Atendimento</Link>
             </Button>
           </div>
         </div>
@@ -38,9 +38,9 @@ const Index = () => {
             description="Chat com assistente virtual para orientação sobre direitos sociais"
           />
           <FeatureCard
-            icon={<Map className="w-6 h-6" />}
-            title="Dados de Mapeamento IA"
-            description="Análise inteligente de dados e mapeamento de informações"
+            icon={<FileText className="w-6 h-6" />}
+            title="Upload de Documentos"
+            description="Envie RG, CPF e comprovantes com leitura automática"
           />
         </div>
       </section>
@@ -67,8 +67,8 @@ const Index = () => {
                 2
               </div>
               <div>
-                <h3 className="font-semibold text-foreground mb-2">Acesse Dados de Mapeamento</h3>
-                <p>Visualize análises e mapeamentos inteligentes gerados pela nossa IA para melhor compreensão</p>
+                <h3 className="font-semibold text-foreground mb-2">Envie seus Documentos</h3>
+                <p>Faça upload de RG, CPF e comprovantes - nossa IA extrai as informações automaticamente</p>
               </div>
             </div>
           </div>
