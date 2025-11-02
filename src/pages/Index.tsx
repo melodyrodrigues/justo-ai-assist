@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Shield } from "lucide-react";
+import { MessageSquare, FileText, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
-import StatisticsCard from "@/components/StatisticsCard";
 
 const Index = () => {
   return (
@@ -33,16 +32,16 @@ const Index = () => {
       {/* Features Section */}
       <section className="container mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-          <Link to="/agent-panel" className="block">
-            <div className="bg-card rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer">
-              <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center text-primary-foreground mb-4">
-                <Shield className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Acesso Governo</h3>
-              <p className="text-muted-foreground text-sm">Painel de Análise - Agentes Públicos</p>
-            </div>
-          </Link>
-          <StatisticsCard />
+          <FeatureCard
+            icon={<MessageSquare className="w-6 h-6" />}
+            title="Acesso Governo"
+            description="Acesso de Agentes Públicos"
+          />
+          <FeatureCard
+            icon={<FileText className="w-6 h-6" />}
+            title="Analise Documental IA"
+            description="Análise inteligente de documentos e comprovantes com IA"
+          />
         </div>
       </section>
 

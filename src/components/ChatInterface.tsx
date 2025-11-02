@@ -5,7 +5,6 @@ import { Card } from "@/components/ui/card";
 import { Send, Mic, MicOff, Loader2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { User } from "@supabase/supabase-js";
 
 interface Message {
   role: "user" | "assistant";
@@ -22,8 +21,6 @@ const ChatInterface = () => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
-  const [requestId, setRequestId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
@@ -35,83 +32,17 @@ const ChatInterface = () => {
     scrollToBottom();
   }, [messages]);
 
-  useEffect(() => {
-    // Get current user
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user || null);
-    });
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user || null);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    // Check for existing benefit request
-    if (user) {
-      loadExistingRequest();
-    }
-  }, [user]);
-
-  const loadExistingRequest = async () => {
-    if (!user) return;
-
-    const { data } = await supabase
-      .from("benefit_requests")
-      .select("*")
-      .eq("user_id", user.id)
-      .order("created_at", { ascending: false })
-      .limit(1)
-      .maybeSingle();
-
-    if (data) {
-      setRequestId(data.id);
-      if (data.chat_messages && Array.isArray(data.chat_messages)) {
-        const messages = data.chat_messages as any[];
-        setMessages(messages.filter(m => m.role && m.content) as Message[]);
-      }
-
-      // Check status and show notification if decided
-      if (data.status === "approved") {
-        toast({
-          title: "Benefício Aprovado! ✅",
-          description: data.decision_notes || "Seu benefício foi aprovado pelos agentes públicos.",
-          duration: 10000,
-        });
-      } else if (data.status === "rejected") {
-        toast({
-          title: "Benefício Não Aprovado ❌",
-          description: data.decision_notes || "Seu benefício não foi aprovado. Entre em contato para mais informações.",
-          duration: 10000,
-          variant: "destructive",
-        });
-      }
-    }
-  };
-
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
 
-    if (!user) {
-      toast({
-        title: "Login necessário",
-        description: "Você precisa fazer login para usar o chat.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     const userMessage: Message = { role: "user", content: input };
-    const updatedMessages = [...messages, userMessage];
-    setMessages(updatedMessages);
+    setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
 
     try {
       const { data, error } = await supabase.functions.invoke("chat", {
-        body: { messages: updatedMessages },
+        body: { messages: [...messages, userMessage] },
       });
 
       if (error) throw error;
@@ -120,11 +51,7 @@ const ChatInterface = () => {
         role: "assistant",
         content: data.response,
       };
-      const finalMessages = [...updatedMessages, assistantMessage];
-      setMessages(finalMessages);
-
-      // Save or update benefit request
-      await saveBenefitRequest(finalMessages);
+      setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
       console.error("Error sending message:", error);
       toast({
@@ -134,37 +61,6 @@ const ChatInterface = () => {
       });
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const saveBenefitRequest = async (chatMessages: Message[]) => {
-    if (!user) return;
-
-    const userName = user.email?.split("@")[0] || "Usuário";
-    const messagesJson = chatMessages as any;
-
-    if (requestId) {
-      // Update existing request
-      await supabase
-        .from("benefit_requests")
-        .update({ chat_messages: messagesJson })
-        .eq("id", requestId);
-    } else {
-      // Create new request
-      const { data } = await supabase
-        .from("benefit_requests")
-        .insert([{
-          user_id: user.id,
-          user_name: userName,
-          chat_messages: messagesJson,
-          status: "pending",
-        }])
-        .select()
-        .single();
-
-      if (data) {
-        setRequestId(data.id);
-      }
     }
   };
 
