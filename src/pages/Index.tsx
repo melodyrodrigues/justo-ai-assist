@@ -20,12 +20,6 @@ const Index = () => {
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
             Orientação para benefícios sociais
           </p>
-          
-          <div className="flex justify-center pt-4">
-            <Button asChild size="lg" className="text-lg h-14 shadow-primary">
-              <Link to="/dashboard">Começar Atendimento</Link>
-            </Button>
-          </div>
         </div>
       </header>
 
