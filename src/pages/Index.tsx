@@ -18,7 +18,7 @@ const Index = () => {
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-            Assistência social para pessoas afetadas por enchentes e alagamentos
+            Orientação para benefícios sociais
           </p>
           
           <div className="flex justify-center pt-4">
