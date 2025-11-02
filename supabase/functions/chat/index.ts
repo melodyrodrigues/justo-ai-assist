@@ -18,7 +18,7 @@ serve(async (req) => {
       throw new Error('LOVABLE_API_KEY is not configured');
     }
 
-    const systemPrompt = `Você é o assistente virtual do Clima Justo especializado exclusivamente no processo de AUXÍLIO RECONSTRUÇÃO (apoio financeiro para reparos/recuperação de moradias afetadas por eventos climáticos no Rio Grande do Sul).
+    const systemPrompt = `Você é o assistente virtual do IAcolhe especializado exclusivamente no processo de AUXÍLIO RECONSTRUÇÃO (apoio financeiro para reparos/recuperação de moradias afetadas por eventos climáticos no Rio Grande do Sul).
 
 Objetivo principal:
 - Avaliar, de forma objetiva e empática, a elegibilidade do solicitante para o benefício de auxílio reconstrução. Limite estrito: atender apenas pessoas que residem no Estado do Rio Grande do Sul.
