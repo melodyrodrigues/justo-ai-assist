@@ -34,8 +34,8 @@ const Index = () => {
         <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           <FeatureCard
             icon={<MessageSquare className="w-6 h-6" />}
-            title="Atendimento IA"
-            description="Chat com assistente virtual para orientação sobre direitos sociais"
+            title="Acesso Governo"
+            description="Acesso direto aos serviços e informações governamentais"
           />
           <FeatureCard
             icon={<FileText className="w-6 h-6" />}
