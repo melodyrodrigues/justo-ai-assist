@@ -58,7 +58,7 @@ const Index = () => {
               </div>
               <div>
                 <h3 className="font-semibold text-foreground mb-2">Converse com nosso Assistente</h3>
-                <p>Explique sua situação e receba orientação imediata sobre direitos e benefícios disponíveis</p>
+                <p>Explique sua situação e receba orientação imediata benefícios disponíveis para você</p>
               </div>
             </div>
             
