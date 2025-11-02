@@ -23,7 +23,7 @@ const Index = () => {
           
           <div className="flex justify-center pt-4">
             <Button asChild size="lg" className="text-lg h-14 shadow-primary">
-              <Link to="/dashboard">Começar Atendimento</Link>
+              <Link to="/dashboard">Acesso Governo</Link>
             </Button>
           </div>
         </div>
