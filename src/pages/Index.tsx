@@ -36,11 +36,13 @@ const Index = () => {
             icon={<MessageSquare className="w-6 h-6" />}
             title="Acesso Governo"
             description="Acesso de Agentes Públicos"
+            link="/dashboard"
           />
           <FeatureCard
             icon={<FileText className="w-6 h-6" />}
             title="Analise Documental IA"
             description="Análise inteligente de documentos e comprovantes com IA"
+            link="/document-analytics"
           />
         </div>
       </section>
@@ -78,14 +80,30 @@ const Index = () => {
   );
 };
 
-const FeatureCard = ({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) => (
-  <div className="bg-card rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-    <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center text-primary-foreground mb-4">
-      {icon}
+const FeatureCard = ({ icon, title, description, link }: { icon: React.ReactNode; title: string; description: string; link?: string }) => {
+  const content = (
+    <>
+      <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center text-primary-foreground mb-4">
+        {icon}
+      </div>
+      <h3 className="text-lg font-semibold text-foreground mb-2">{title}</h3>
+      <p className="text-muted-foreground text-sm">{description}</p>
+    </>
+  );
+
+  if (link) {
+    return (
+      <Link to={link} className="block bg-card rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <div className="bg-card rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+      {content}
     </div>
-    <h3 className="text-lg font-semibold text-foreground mb-2">{title}</h3>
-    <p className="text-muted-foreground text-sm">{description}</p>
-  </div>
-);
+  );
+};
 
 export default Index;
