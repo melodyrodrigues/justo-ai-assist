@@ -17,6 +17,7 @@ export type Database = {
       benefit_requests: {
         Row: {
           agent_id: string | null
+          benefit_type: string | null
           chat_messages: Json
           created_at: string | null
           decision_date: string | null
@@ -29,6 +30,7 @@ export type Database = {
         }
         Insert: {
           agent_id?: string | null
+          benefit_type?: string | null
           chat_messages: Json
           created_at?: string | null
           decision_date?: string | null
@@ -41,6 +43,7 @@ export type Database = {
         }
         Update: {
           agent_id?: string | null
+          benefit_type?: string | null
           chat_messages?: Json
           created_at?: string | null
           decision_date?: string | null
@@ -59,6 +62,7 @@ export type Database = {
           created_at: string | null
           document_name: string
           id: string
+          is_valid: boolean | null
           request_id: string
         }
         Insert: {
@@ -66,6 +70,7 @@ export type Database = {
           created_at?: string | null
           document_name: string
           id?: string
+          is_valid?: boolean | null
           request_id: string
         }
         Update: {
@@ -73,6 +78,7 @@ export type Database = {
           created_at?: string | null
           document_name?: string
           id?: string
+          is_valid?: boolean | null
           request_id?: string
         }
         Relationships: [

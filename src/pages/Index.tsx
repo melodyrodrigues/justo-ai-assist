@@ -32,13 +32,13 @@ const Index = () => {
       {/* Features Section */}
       <section className="container mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-          <Link to="/auth" className="block">
+          <Link to="/agent-panel" className="block">
             <div className="bg-card rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer">
               <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center text-primary-foreground mb-4">
-                <MessageSquare className="w-6 h-6" />
+                <Shield className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-semibold text-foreground mb-2">Acesso Governo</h3>
-              <p className="text-muted-foreground text-sm">Acesso de Agentes Públicos</p>
+              <p className="text-muted-foreground text-sm">Painel de Análise - Agentes Públicos</p>
             </div>
           </Link>
           <FeatureCard
